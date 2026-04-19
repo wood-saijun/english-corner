@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英语角策划生成器</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --orange-soft: #ffd4a0;
+  --sky-light:   #87ceeb;
+  --radius-lg:   24px;
+  --radius-md:   16px;
+  --radius-sm:   10px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Georgia', 'Songti SC', serif; min-height: 100vh; color: #fff; overflow-x: hidden; position: relative; }
+
+.bg-sky { position:fixed;inset:0;z-index:-10;background:linear-gradient(180deg,#0a1f3d 0%,#0d3060 12%,#1a5490 28%,#2980b9 45%,#5ba8d4 58%,#87ceeb 68%,#b8dff0 74%,#d4eef8 78%,#e8f6fb 80%,#c8e8e0 84%,#5dade2 87%,#2e86c1 90%,#1a6090 94%,#0d3d6b 100%); }
+.bg-sun { position:fixed;z-index:-9;width:180px;height:180px;border-radius:50%;top:8%;right:18%;background:radial-gradient(circle,rgba(255,255,220,1) 0%,rgba(255,230,100,.9) 18%,rgba(255,180,50,.6) 40%,rgba(255,140,30,.2) 65%,transparent 80%);box-shadow:0 0 60px 30px rgba(255,220,80,.35),0 0 120px 60px rgba(255,180,40,.18),0 0 200px 100px rgba(255,150,30,.08); }
+.bg-clouds { position:fixed;z-index:-8;inset:0;pointer-events:none; }
+.cloud { position:absolute;background:rgba(255,255,255,.82);border-radius:50px;filter:blur(2px); }
+.cloud::before,.cloud::after { content:'';position:absolute;background:inherit;border-radius:50%; }
+.c1{width:110px;height:32px;top:14%;left:8%;opacity:.75}.c1::before{width:56px;height:48px;top:-22px;left:14px}.c1::after{width:44px;height:38px;top:-14px;left:52px}
+.c2{width:160px;height:38px;top:9%;left:38%;opacity:.55}.c2::before{width:70px;height:58px;top:-28px;left:22px}.c2::after{width:52px;height:42px;top:-18px;left:78px}
+.c3{width:90px;height:26px;top:18%;left:62%;opacity:.45}.c3::before{width:44px;height:38px;top:-18px;left:12px}.c3::after{width:36px;height:30px;top:-12px;left:42px}
+.bg-sea { position:fixed;z-index:-7;bottom:0;left:0;right:0;height:28%;background:linear-gradient(180deg,rgba(93,173,226,0) 0%,rgba(46,134,193,.55) 25%,rgba(26,96,144,.80) 55%,rgba(13,61,107,.95) 80%,rgba(8,40,75,1) 100%);overflow:hidden; }
+.sea-shimmer { position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent 0px,rgba(255,255,255,.03) 2px,transparent 4px,rgba(255,255,255,.06) 8px,transparent 12px);animation:seaMove 8s linear infinite; }
+.sea-shimmer2 { position:absolute;inset:0;background:repeating-linear-gradient(88deg,transparent 0px,rgba(135,206,235,.04) 3px,transparent 6px,rgba(255,255,255,.03) 10px,transparent 16px);animation:seaMove 12s linear infinite reverse; }
+@keyframes seaMove { from{background-position:0 0}to{background-position:200px 0} }
+.bg-horizon { position:fixed;z-index:-6;bottom:26%;left:0;right:0;height:6%;background:linear-gradient(180deg,transparent,rgba(200,230,245,.18),transparent);filter:blur(4px); }
+.bg-arch { position:fixed;z-index:-5;bottom:22%;left:0;right:0;height:220px;pointer-events:none;display:flex;align-items:flex-end; }
+.arch-svg { width:100%;height:100%;filter:drop-shadow(0 -4px 20px rgba(13,45,80,.5)); }
+.bg-overlay { position:fixed;inset:0;z-index:-4;pointer-events:none;background:radial-gradient(ellipse 60% 40% at 82% 18%,rgba(255,200,80,.12) 0%,transparent 70%),radial-gradient(ellipse 40% 30% at 15% 72%,rgba(13,45,80,.35) 0%,transparent 70%); }
+.bg-grain { position:fixed;inset:0;z-index:-3;pointer-events:none;opacity:.22;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.bg-vignette { position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 42%,rgba(5,20,45,.5) 100%); }
+
+.site-header { text-align:center;padding:38px 20px 16px; }
+.site-header h1 { font-size:clamp(1.7rem,4.5vw,2.6rem);font-weight:900;letter-spacing:5px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.4),0 0 40px rgba(255,220,100,.25); }
+.site-header h1 em { color:var(--orange-soft);font-style:normal; }
+.site-header p { margin-top:7px;font-size:.88rem;letter-spacing:3px;color:rgba(255,255,255,.62);font-style:italic; }
+.header-rule { width:80px;height:2px;margin:14px auto 0;background:linear-gradient(90deg,transparent,rgba(255,212,160,.8),rgba(135,206,235,.8),transparent); }
+
+.layout { display:flex;gap:24px;padding:20px 32px 70px;max-width:1400px;margin:0 auto;align-items:flex-start; }
+.card { background:rgba(253,250,245,.12);backdrop-filter:blur(28px) saturate(1.4);-webkit-backdrop-filter:blur(28px) saturate(1.4);border:1px solid rgba(255,255,255,.3);border-radius:var(--radius-lg);box-shadow:0 8px 40px rgba(5,20,50,.28),0 2px 0 rgba(255,255,255,.2) inset,0 -1px 0 rgba(0,0,0,.08) inset;padding:28px 26px; }
+
+.left-panel { flex:0 0 400px;position:sticky;top:20px;display:flex;flex-direction:column;gap:16px; }
+.section-title { font-size:.75rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.92);margin-bottom:18px;display:flex;align-items:center;gap:10px; }
+.section-title::before { content:'';display:inline-block;width:4px;height:20px;flex-shrink:0;background:linear-gradient(180deg,var(--orange-soft),var(--sky-light));border-radius:2px; }
+.field { margin-bottom:14px; }
+.field:last-child { margin-bottom:0; }
+.field label { display:block;font-size:.7rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:6px; }
+.field input,.field textarea { width:100%;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);border-radius:var(--radius-sm);padding:10px 13px;color:#fff;font-size:.88rem;font-family:'Georgia',serif;transition:all .25s;outline:none; }
+.field input::placeholder,.field textarea::placeholder { color:rgba(255,255,255,.32);font-style:italic; }
+.field input:focus,.field textarea:focus { border-color:rgba(255,212,160,.7);background:rgba(255,255,255,.16);box-shadow:0 0 0 3px rgba(255,212,160,.12); }
+.field textarea { resize:vertical;min-height:90px;line-height:1.7; }
+
+.api-key-row { display:flex;gap:8px;align-items:stretch; }
+.api-key-row input { flex:1; }
+.btn-test { padding:10px 14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:var(--radius-sm);color:rgba(255,255,255,.8);font-size:.74rem;font-weight:800;letter-spacing:.5px;cursor:pointer;white-space:nowrap;transition:all .2s; }
+.btn-test:hover { background:rgba(255,255,255,.18);color:#fff; }
+.status-row { display:flex;align-items:center;gap:8px;margin-top:8px; }
+.status-badge { display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:20px;transition:all .3s; }
+.status-badge.online  { background:rgba(80,200,120,.15);color:#7dcea0;border:1px solid rgba(80,200,120,.3); }
+.status-badge.offline { background:rgba(200,80,80,.15);color:#e8a0a0;border:1px solid rgba(200,80,80,.3); }
+.status-badge.checking{ background:rgba(255,212,160,.15);color:var(--orange-soft);border:1px solid rgba(255,212,160,.3); }
+.status-dot { width:7px;height:7px;border-radius:50%;background:currentColor; }
+.status-dot.pulse { animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
+.ds-logo { font-size:.7rem;color:rgba(255,255,255,.4);font-style:italic;margin-left:auto; }
+
+.game-input-wrap { position:relative; }
+.game-input-wrap input { padding-right:44px; }
+.btn-ai-spark { position:absolute;right:6px;top:50%;transform:translateY(-50%);background:linear-gradient(135deg,#f4a261,#e07b39);border:none;border-radius:7px;width:32px;height:32px;color:#fff;font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s; }
+.btn-ai-spark:hover { transform:translateY(-50%) scale(1.12);box-shadow:0 3px 12px rgba(244,162,97,.5); }
+.btn-ai-spark:disabled { opacity:.4;cursor:not-allowed;transform:translateY(-50%); }
+
+.game-hints { display:flex;flex-wrap:wrap;gap:5px;margin-top:8px; }
+.hint-badge { font-size:.65rem;font-weight:700;letter-spacing:.8px;padding:3px 9px;border-radius:20px;background:rgba(255,212,160,.14);border:1px solid rgba(255,212,160,.28);color:rgba(255,212,160,.85);cursor:pointer;transition:all .2s;user-select:none; }
+.hint-badge:hover { background:rgba(255,212,160,.28);border-color:rgba(255,212,160,.6);color:var(--orange-soft);transform:translateY(-1px); }
+
+.loading-bar { display:none;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,212,160,.1);border:1px solid rgba(255,212,160,.22);border-radius:var(--radius-sm);margin-top:8px;font-size:.8rem;color:var(--orange-soft); }
+.loading-bar.show { display:flex; }
+.spinner { width:15px;height:15px;border:2px solid rgba(255,212,160,.25);border-top-color:var(--orange-soft);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0; }
+@keyframes spin { to{transform:rotate(360deg)} }
+
+.agenda-grid { display:flex;flex-direction:column;gap:8px; }
+.agenda-row { display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:9px 13px; }
+.agenda-row .ag-num { font-size:.72rem;font-weight:800;color:var(--orange-soft);min-width:20px; }
+.agenda-row .ag-label { flex:1;font-size:.86rem;color:rgba(255,255,255,.9); }
+.agenda-row .ag-label span { font-size:.73rem;color:rgba(255,255,255,.45); }
+.agenda-row input[type="number"] { width:58px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:5px 8px;color:var(--orange-soft);font-size:.92rem;font-weight:700;text-align:center;outline:none; }
+.agenda-row input[type="number"]:focus { border-color:var(--orange-soft);box-shadow:0 0 0 2px rgba(255,212,160,.16); }
+.agenda-row .ag-unit { font-size:.73rem;color:rgba(255,255,255,.45); }
+input[type=number]::-webkit-inner-spin-button { opacity:.5; }
+
+.btn-generate { width:100%;padding:15px;background:linear-gradient(135deg,#2980b9 0%,#1a6fa8 40%,#0d4f7c 100%);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:var(--radius-md);font-size:1rem;font-weight:900;letter-spacing:3px;cursor:pointer;transition:all .3s;box-shadow:0 4px 24px rgba(13,79,124,.5),0 1px 0 rgba(255,255,255,.2) inset;position:relative;overflow:hidden; }
+.btn-generate::after { content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);transform:translateX(-100%);transition:transform .6s; }
+.btn-generate:hover::after { transform:translateX(100%); }
+.btn-generate:hover { transform:translateY(-2px);box-shadow:0 8px 32px rgba(13,79,124,.65); }
+.btn-generate:active { transform:translateY(0); }
+.btn-generate:disabled { opacity:.55;cursor:not-allowed;transform:none; }
+.btn-generate:disabled::after { display:none; }
+
+.right-panel { flex:1;display:flex;flex-direction:column;gap:20px; }
+.output-header { display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12);flex-wrap:wrap;gap:10px; }
+.output-header-left { display:flex;align-items:center;gap:14px;flex-wrap:wrap; }
+.edit-tip { font-size:.68rem;color:rgba(255,255,255,.42);font-style:italic; }
+
+.editor-toolbar { display:none;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.1); }
+.tb-btn { padding:4px 11px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:7px;color:rgba(255,255,255,.75);font-size:.72rem;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.5px; }
+.tb-btn:hover { background:rgba(255,255,255,.2);color:#fff;transform:translateY(-1px); }
+.tb-btn.danger { border-color:rgba(255,120,120,.3);color:rgba(255,180,180,.8); }
+.tb-btn.danger:hover { background:rgba(255,80,80,.15);color:#ffaaaa; }
+
+#preview-editor { min-height:220px;outline:none;line-height:1.85;font-size:.9rem;color:rgba(255,255,255,.92);word-break:break-word;font-family:'Georgia',serif;caret-color:var(--orange-soft); }
+#preview-editor:empty::before { content:attr(data-placeholder);color:rgba(255,255,255,.28);font-style:italic;pointer-events:none; }
+
+#preview-editor .ev-title { font-size:1.25rem;font-weight:900;color:var(--orange-soft);text-align:center;letter-spacing:4px;margin-bottom:4px;text-shadow:0 0 30px rgba(255,180,60,.3); }
+#preview-editor .ev-title-en { font-size:.82rem;color:rgba(255,255,255,.5);text-align:center;letter-spacing:2.5px;font-style:italic;margin-bottom:20px; }
+#preview-editor .info-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px; }
+#preview-editor .info-cell { background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:11px 14px; }
+#preview-editor .ic-label { font-size:.66rem;color:rgba(255,212,160,.85);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;font-weight:700; }
+#preview-editor .ic-zh { font-size:.88rem;color:#fff;font-weight:700; }
+#preview-editor .ic-en { font-size:.76rem;color:rgba(255,255,255,.52);font-style:italic;margin-top:3px; }
+#preview-editor .sec-title { font-size:.73rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--sky-light);margin:22px 0 10px;display:flex;align-items:center;gap:9px; }
+#preview-editor .sec-title::after { content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(135,206,235,.3),transparent); }
+#preview-editor .agenda-item { display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border-left:3px solid rgba(135,206,235,.5);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:9px 14px;margin-bottom:7px; }
+#preview-editor .ai-num { font-size:.72rem;font-weight:900;color:var(--orange-soft);min-width:22px; }
+#preview-editor .ai-body { flex:1; }
+#preview-editor .ai-zh { font-size:.9rem;color:#fff;font-weight:700;display:block; }
+#preview-editor .ai-en { font-size:.77rem;color:rgba(255,255,255,.52);font-style:italic;display:block; }
+#preview-editor .ai-time { font-size:.78rem;font-weight:800;color:rgba(255,212,160,.85);white-space:nowrap; }
+#preview-editor .bi-item { background:rgba(255,255,255,.07);border-radius:var(--radius-sm);padding:12px 15px;margin-bottom:9px;border-left:3px solid rgba(255,212,160,.4); }
+#preview-editor .bi-tag { font-size:.64rem;font-weight:900;letter-spacing:1.5px;color:var(--orange-soft);text-transform:uppercase;margin-bottom:5px; }
+#preview-editor .bi-zh { font-size:.9rem;color:#fff;line-height:1.7;font-weight:600; }
+#preview-editor .bi-en { font-size:.81rem;color:rgba(255,255,255,.58);font-style:italic;line-height:1.7;margin-top:4px; }
+#preview-editor .game-title { font-size:1rem;font-weight:800;color:var(--orange-soft);margin-bottom:10px; }
+#preview-editor .game-title span { font-size:.82rem;color:rgba(255,255,255,.55);font-style:italic;font-weight:400;margin-left:8px; }
+#preview-editor .ev-footer { text-align:center;padding:15px;margin-top:8px;background:linear-gradient(135deg,rgba(42,132,195,.12),rgba(255,212,160,.08));border:1px solid rgba(135,206,235,.18);border-radius:var(--radius-sm);font-size:.82rem;color:rgba(255,255,255,.55);font-style:italic;letter-spacing:1.5px; }
+
+.btn-copy { padding:8px 20px;background:rgba(255,212,160,.12);color:var(--orange-soft);border:1px solid rgba(255,212,160,.32);border-radius:var(--radius-sm);font-size:.76rem;font-weight:800;letter-spacing:1px;cursor:pointer;transition:all .25s; }
+.btn-copy:hover { background:rgba(255,212,160,.24);border-color:rgba(255,212,160,.65);transform:translateY(-1px); }
+.btn-copy.ok { background:rgba(80,200,120,.16);color:#90ee90;border-color:rgba(80,200,120,.4); }
+
+.placeholder { text-align:center;padding:70px 20px;color:rgba(255,255,255,.3); }
+.placeholder .ph-icon { font-size:3rem;display:block;margin-bottom:16px; }
+.placeholder p { font-size:.9rem;line-height:2;font-style:italic; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)} }
+.out-wrap { animation:fadeUp .45s cubic-bezier(.16,1,.3,1); }
+
+#_cliparea { position:absolute;left:-9999px;top:0; }
+
+@media(max-width:880px){
+  .layout{flex-direction:column;padding:14px 14px 60px;}
+  .left-panel{flex:none;width:100%;position:static;}
+  #preview-editor .info-grid{grid-template-columns:1fr;}
+  .bg-arch{display:none;}
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:3px}
+</style>
+</head>
+<body>
+
+<div class="bg-sky"></div>
+<div class="bg-sun"></div>
+<div class="bg-clouds"><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div></div>
+<div class="bg-sea"><div class="sea-shimmer"></div><div class="sea-shimmer2"></div></div>
+<div class="bg-horizon"></div>
+<div class="bg-arch">
+  <svg class="arch-svg" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0e8d5"/><stop offset="60%" stop-color="#e2d5b8"/><stop offset="100%" stop-color="#c8b89a"/></linearGradient>
+      <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a3050" stop-opacity="0"/><stop offset="100%" stop-color="#0a1e3a" stop-opacity="0.7"/></linearGradient>
+    </defs>
+    <ellipse cx="72" cy="148" rx="38" ry="22" fill="#ddd0b0" opacity=".9"/>
+    <rect x="52" y="148" width="40" height="55" fill="url(#wg)" opacity=".9"/>
+    <rect x="59" y="165" width="10" height="14" fill="#1a3050" opacity=".5"/>
+    <rect x="75" y="165" width="10" height="14" fill="#1a3050" opacity=".5"/>
+    <rect x="70" y="128" width="4" height="16" fill="#c8b89a" opacity=".8"/>
+    <rect x="65" y="132" width="14" height="3" fill="#c8b89a" opacity=".8"/>
+    <rect x="10" y="175" width="38" height="45" fill="url(#wg)" opacity=".75"/>
+    <rect x="30" y="160" width="32" height="60" fill="url(#wg)" opacity=".85"/>
+    <rect x="55" y="168" width="28" height="52" fill="#e0d4b4" opacity=".8"/>
+    <rect x="280" y="195" width="220" height="8" fill="#d8ccac"/><rect x="288" y="188" width="204" height="8" fill="#e0d4b4"/><rect x="296" y="181" width="188" height="8" fill="#e8dcc0"/>
+    <rect x="300" y="110" width="14" height="72" fill="#f0e8d5"/><rect x="328" y="110" width="14" height="72" fill="#ead8b8"/><rect x="356" y="110" width="14" height="72" fill="#f0e8d5"/><rect x="384" y="110" width="14" height="72" fill="#ead8b8"/><rect x="412" y="110" width="14" height="72" fill="#f0e8d5"/><rect x="440" y="110" width="14" height="72" fill="#ead8b8"/><rect x="468" y="110" width="14" height="72" fill="#f0e8d5"/>
+    <rect x="294" y="100" width="192" height="12" fill="#e8dcc0"/><rect x="290" y="90" width="200" height="12" fill="#f0e8d5"/>
+    <polygon points="290,90 490,90 390,44" fill="#ead8b8"/><polygon points="300,90 480,90 390,54" fill="#f0e8d5" opacity=".6"/>
+    <rect x="680" y="130" width="18" height="90" fill="#ddd0b0" opacity=".85"/>
+    <ellipse cx="689" cy="128" rx="14" ry="8" fill="#d4c8a8" opacity=".85"/>
+    <line x1="689" y1="128" x2="689" y2="78" stroke="#c8b89a" stroke-width="3" opacity=".7"/><line x1="689" y1="128" x2="729" y2="128" stroke="#c8b89a" stroke-width="3" opacity=".7"/><line x1="689" y1="128" x2="689" y2="178" stroke="#c8b89a" stroke-width="3" opacity=".7"/><line x1="689" y1="128" x2="649" y2="128" stroke="#c8b89a" stroke-width="3" opacity=".7"/>
+    <rect x="900" y="158" width="42" height="62" fill="url(#wg)" opacity=".9"/><rect x="936" y="148" width="38" height="72" fill="#e8dcbc" opacity=".85"/><rect x="968" y="140" width="36" height="80" fill="url(#wg)" opacity=".9"/><rect x="998" y="152" width="40" height="68" fill="#e0d4b4" opacity=".85"/><rect x="1032" y="145" width="38" height="75" fill="url(#wg)" opacity=".88"/><rect x="1064" y="138" width="42" height="82" fill="#e8dcbc" opacity=".85"/><rect x="1100" y="150" width="38" height="70" fill="url(#wg)" opacity=".88"/>
+    <ellipse cx="921" cy="158" rx="22" ry="13" fill="#a8c8e8" opacity=".75"/><ellipse cx="987" cy="140" rx="20" ry="12" fill="#a8c8e8" opacity=".75"/><ellipse cx="1051" cy="145" rx="21" ry="12" fill="#a8c8e8" opacity=".75"/><ellipse cx="1083" cy="138" rx="20" ry="11" fill="#90b8e0" opacity=".75"/>
+    <rect x="1310" y="125" width="50" height="95" fill="#d8ccac" opacity=".85"/><rect x="1320" y="115" width="30" height="12" fill="#e0d4b4" opacity=".9"/><rect x="1360" y="148" width="38" height="72" fill="url(#wg)" opacity=".8"/><rect x="1390" y="138" width="50" height="82" fill="#d8ccac" opacity=".8"/>
+    <path d="M0,210 Q180,195 350,205 Q500,200 640,210 Q780,218 900,205 Q1050,195 1200,208 Q1320,215 1440,205 L1440,220 L0,220 Z" fill="#1a3a60" opacity=".9"/>
+    <path d="M0,215 Q200,205 400,212 Q600,218 800,210 Q1000,204 1200,212 Q1340,218 1440,210 L1440,220 L0,220 Z" fill="#0d2840" opacity=".95"/>
+    <rect x="0" y="0" width="1440" height="220" fill="url(#sg)" opacity=".22"/>
+  </svg>
+</div>
+<div class="bg-overlay"></div>
+<div class="bg-grain"></div>
+<div class="bg-vignette"></div>
+<textarea id="_cliparea"></textarea>
+
+<header class="site-header">
+  <h1>🌊 英语角<em>策划生成器</em></h1>
+  <p>English Corner Planner · Mediterranean Edition</p>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+  <aside class="left-panel">
+
+    <div class="card">
+      <div class="section-title">🤖 DeepSeek AI</div>
+      <div class="field">
+        <label>API Key</label>
+        <div class="api-key-row">
+          <input type="password" id="ds-key" placeholder="sk-xxxxxxxxxxxxxxxx">
+          <button class="btn-test" onclick="testDS()">测试连接</button>
+        </div>
+        <div class="status-row">
+          <span class="status-badge checking" id="ds-status"><span class="status-dot pulse"></span> 未检测</span>
+          <span class="ds-logo">platform.deepseek.com</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">活动基本信息</div>
+      <div class="field"><label>📌 活动名称</label><input type="text" id="f-name" placeholder="如：电影主题英语角"></div>
+      <div class="field"><label>🕐 活动时间</label><input type="text" id="f-time" placeholder="如：每周五 19:00-20:30"></div>
+      <div class="field"><label>📍 活动地点</label><input type="text" id="f-loc"  placeholder="如：图书馆301教室"></div>
+      <div class="field"><label>✨ 本期主题</label><input type="text" id="f-theme" placeholder="如：电影与生活"></div>
+      <div class="field"><label>🎤 嘉宾信息</label><input type="text" id="f-guest" placeholder="如：俄罗斯留学生 Olesya & Karina"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">🎮 小游戏</div>
+      <div class="field">
+        <label>游戏名称 → AI 自动生成双语规则</label>
+        <div class="game-input-wrap">
+          <input type="text" id="f-game" placeholder="输入任意游戏，或点击下方快速选择">
+          <button class="btn-ai-spark" id="btn-spark" onclick="fetchGameRules()" title="AI 立即生成规则">✨</button>
+        </div>
+        <div class="loading-bar" id="game-loading">
+          <div class="spinner"></div>
+          <span id="game-loading-msg">DeepSeek 正在生成游戏规则…</span>
+        </div>
+        <div class="game-hints" id="game-hints"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">💬 讨论主题</div>
+      <div class="field">
+        <label>关键词（每行一个）→ AI 生成双语问题</label>
+        <textarea id="f-topics" placeholder="如：&#10;最喜欢的电影&#10;电影对生活的影响&#10;想分享的电影故事"></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">流程时间</div>
+      <div class="agenda-grid" id="agenda-grid"></div>
+    </div>
+
+    <button class="btn-generate" id="btn-gen" onclick="generate()">✦ 一键生成双语策划</button>
+  </aside>
+
+  <main class="right-panel">
+    <div class="card">
+      <div class="output-header">
+        <div class="output-header-left">
+          <div class="section-title" style="margin-bottom:0">策划预览 · 可直接编辑</div>
+          <span class="edit-tip">✏️ 生成后点击任意内容即可修改</span>
+        </div>
+        <button class="btn-copy" id="btn-copy" onclick="doCopy()">📋 复制最终版本</button>
+      </div>
+
+      <div class="editor-toolbar" id="editor-toolbar">
+        <button class="tb-btn" onclick="document.execCommand('bold')"><b>B</b> 加粗</button>
+        <button class="tb-btn" onclick="document.execCommand('italic')"><i>I</i> 斜体</button>
+        <button class="tb-btn" onclick="ins('🎯')">🎯</button>
+        <button class="tb-btn" onclick="ins('⭐')">⭐</button>
+        <button class="tb-btn" onclick="ins('🎉')">🎉</button>
+        <button class="tb-btn" onclick="ins('📌')">📌</button>
+        <button class="tb-btn" onclick="ins('✅')">✅</button>
+        <button class="tb-btn danger" onclick="clearEd()">🗑 清空</button>
+      </div>
+
+      <div id="preview-editor" contenteditable="false"
+           data-placeholder="← 填写左侧信息，点击「一键生成」后在此预览并编辑">
+        <div class="placeholder">
+          <span class="ph-icon">🌊</span>
+          <p>填写左侧信息<br>点击「一键生成双语策划」<br><br>
+          <span style="font-size:.78rem;opacity:.5;">生成后可直接在此处编辑<br>复制的是编辑后的最终版本</span></p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+/* ══════════════════════════════════════
+   CONFIG
+══════════════════════════════════════ */
+const DS_BASE  = 'https://api.deepseek.com/v1';
+const DS_MODEL = 'deepseek-chat';
+
+const AGENDA = [
+  {zh:'入场签到', en:'Sign in',             min:5 },
+  {zh:'小游戏',   en:'Mini-game',           min:10},
+  {zh:'嘉宾分享', en:'Guest sharing',       min:30},
+  {zh:'话题讨论', en:'Topic discussion',    min:30},
+  {zh:'自由畅谈', en:'Free talk',           min:15},
+  {zh:'收尾总结', en:'Wrap up & Summarize', min:10},
+];
+
+const QUICK_GAMES = [
+  '脑筋急转弯','绕口令挑战','单词接龙','两真一假',
+  '你画我猜','故事接龙','即兴演讲','角色扮演',
+  '情感猜猜看','单词炸弹','传话游戏','快速抢答',
+];
+
+/* ══════════════════════════════════════
+   DEEPSEEK
+══════════════════════════════════════ */
+const getKey = () => document.getElementById('ds-key').value.trim();
+
+async function dsCall(prompt, loadingId, loadingMsg) {
+  const key = getKey();
+  if (!key) { alert('请先填写 DeepSeek API Key！\n前往 platform.deepseek.com 免费申请'); throw new Error('no key'); }
+  if (loadingId) {
+    document.getElementById(loadingId).classList.add('show');
+    if (loadingMsg) document.getElementById(loadingId + '-msg').textContent = loadingMsg;
+  }
+  try {
+    const res = await fetch(`${DS_BASE}/chat/completions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
+      body: JSON.stringify({ model: DS_MODEL, messages: [{ role: 'user', content: prompt }], temperature: 0.7, max_tokens: 1500 }),
+    });
+    if (!res.ok) { const e = await res.json().catch(()=>({})); throw new Error(e?.error?.message || `HTTP ${res.status}`); }
+    const data = await res.json();
+    return data.choices?.[0]?.message?.content?.trim() || '';
+  } finally {
+    if (loadingId) document.getElementById(loadingId).classList.remove('show');
+  }
+}
+
+async function testDS() {
+  const badge = document.getElementById('ds-status');
+  badge.className = 'status-badge checking';
+  badge.innerHTML = '<span class="status-dot pulse"></span> 检测中…';
+  if (!getKey()) { badge.className='status-badge offline'; badge.innerHTML='<span class="status-dot"></span> 未填写 Key'; return; }
+  try {
+    const res = await fetch(`${DS_BASE}/chat/completions`, {
+      method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${getKey()}`},
+      body: JSON.stringify({ model: DS_MODEL, messages:[{role:'user',content:'hi'}], max_tokens:5 }),
+    });
+    if (res.ok) { badge.className='status-badge online'; badge.innerHTML='<span class="status-dot pulse"></span> 连接正常 ✓'; }
+    else {
+      const e = await res.json().catch(()=>({}));
+      badge.className='status-badge offline'; badge.innerHTML=`<span class="status-dot"></span> ${e?.error?.message||'HTTP '+res.status}`;
+    }
+  } catch { badge.className='status-badge offline'; badge.innerHTML='<span class="status-dot"></span> 连接失败'; }
+}
+
+/* ══════════════════════════════════════
+   HELPERS
+══════════════════════════════════════ */
+function extract(text, tag) {
+  const m = text.match(new RegExp(`\\[${tag}\\]([\\s\\S]*?)\\[\\/${tag}\\]`));
+  return m ? m[1].trim() : '';
+}
+
+function transTheme(zh) {
+  const map=[['电影与生活','Movies & Life'],['电影','Movies & Cinema'],['旅行','Travel & Discovery'],['文化','Culture & Identity'],['美食','Food & Culture'],['音乐','Music & Life'],['友谊','Friendship'],['未来','Future & Dreams'],['梦想','Dreams & Aspirations'],['技术','Technology'],['科技','Technology & Society'],['学习','Language Learning'],['教育','Education']];
+  for(const[k,v]of map) if(zh.includes(k)) return v;
+  return zh;
+}
+function transName(zh) {
+  return zh.replace('英语角','English Corner').replace('电影主题','Movie-Themed').replace('旅行主题','Travel-Themed').replace('文化主题','Culture-Themed').replace('音乐主题','Music-Themed').replace('美食主题','Food-Themed').replace('活动','Activity');
+}
+function transLoc(zh) {
+  return zh.replace('图书馆','Library').replace('教室','Classroom').replace('报告厅','Lecture Hall').replace('会议室','Meeting Room').replace(/(\d+)楼/,'Floor $1').replace(/(\d+)室/,'Room $1');
+}
+
+/* ══════════════════════════════════════
+   GAME RULES
+══════════════════════════════════════ */
+let cachedGame = { name:'', nameEn:'', zh:'', en:'' };
+
+async function fetchGameRules() {
+  const name = document.getElementById('f-game').value.trim();
+  if (!name) { alert('请先输入游戏名称！'); return; }
+  document.getElementById('btn-spark').disabled = true;
+  try {
+    const raw = await dsCall(
+`你是英语角活动策划专家。请为游戏「${name}」生成双语规则。
+适合英语角（10-25人，约10分钟），规则分4-6步，清晰可操作。
+严格按以下格式输出，标签之间不要有多余内容：
+
+[NAME_EN]游戏英文名[/NAME_EN]
+[RULES_ZH]
+步骤1：xxx
+步骤2：xxx
+步骤3：xxx
+步骤4：xxx
+[/RULES_ZH]
+[RULES_EN]
+Step 1: xxx
+Step 2: xxx
+Step 3: xxx
+Step 4: xxx
+[/RULES_EN]`,
+      'game-loading', `DeepSeek 正在生成「${name}」规则…`);
+
+    cachedGame = {
+      name,
+      nameEn: extract(raw, 'NAME_EN') || name,
+      zh: extract(raw, 'RULES_ZH'),
+      en: extract(raw, 'RULES_EN'),
+    };
+  } catch(e) {
+    if (e.message !== 'no key') alert('AI 生成失败：' + e.message);
+  } finally {
+    document.getElementById('btn-spark').disabled = false;
+  }
+}
+
+/* ══════════════════════════════════════
+   TOPIC QUESTIONS
+══════════════════════════════════════ */
+async function fetchTopics(keywords) {
+  const raw = await dsCall(
+`你是英语角活动策划专家。根据关键词生成中英双语讨论问题。
+关键词：${keywords}
+要求：每个关键词2个问题，问题开放有趣，适合英语学习者，中英文完全对应。
+严格按以下格式，每个问题一个[Q]块，不要加编号或其他内容：
+
+[Q][ZH]中文问题[/ZH][EN]English question[/EN][/Q]`,
+    null, null);
+  const blocks = raw.match(/\[Q\][\s\S]*?\[\/Q\]/g) || [];
+  return blocks.map(b => ({ zh: extract(b,'ZH'), en: extract(b,'EN') })).filter(q=>q.zh&&q.en);
+}
+
+/* ══════════════════════════════════════
+   BUILD UI
+══════════════════════════════════════ */
+function buildAgenda() {
+  const g = document.getElementById('agenda-grid');
+  AGENDA.forEach((a,i) => {
+    const row = document.createElement('div');
+    row.className = 'agenda-row';
+    row.innerHTML = `<span class="ag-num">0${i+1}</span><span class="ag-label">${a.zh} <span>· ${a.en}</span></span><input type="number" id="ag-${i}" value="${a.min}" min="1" max="120"><span class="ag-unit">min</span>`;
+    g.appendChild(row);
+  });
+}
+function buildHints() {
+  const c = document.getElementById('game-hints');
+  QUICK_GAMES.forEach(n => {
+    const b = document.createElement('span');
+    b.className='hint-badge'; b.textContent=n;
+    b.onclick=()=>{ document.getElementById('f-game').value=n; };
+    c.appendChild(b);
+  });
+}
+function fillDefaults() {
+  document.getElementById('f-name').value  = '电影主题英语角';
+  document.getElementById('f-time').value  = '每周五 19:00-20:30';
+  document.getElementById('f-loc').value   = 'XX教室';
+  document.getElementById('f-theme').value = '电影与生活';
+  document.getElementById('f-guest').value = '俄罗斯留学生 Olesya & Karina';
+  document.getElementById('f-game').value  = '脑筋急转弯 & 绕口令';
+  document.getElementById('f-topics').value= '最喜欢的电影\n电影对生活的影响\n想分享的电影故事';
+}
+
+/* ══════════════════════════════════════
+   GENERATE
+══════════════════════════════════════ */
+async function generate() {
+  const btn = document.getElementById('btn-gen');
+  btn.disabled=true; btn.textContent='⏳ DeepSeek 生成中…';
+
+  const name   = document.getElementById('f-name').value.trim()  || '英语角活动';
+  const time   = document.getElementById('f-time').value.trim()  || '待定';
+  const loc    = document.getElementById('f-loc').value.trim()   || '待定';
+  const theme  = document.getElementById('f-theme').value.trim() || '待定';
+  const guest  = document.getElementById('f-guest').value.trim() || '待定';
+  const gameRaw = document.getElementById('f-game').value.trim();
+  const topRaw  = document.getElementById('f-topics').value.trim();
+
+  const nameEn  = transName(name);
+  const themeEn = transTheme(theme);
+  const locEn   = transLoc(loc);
+  const mins    = AGENDA.map((_,i)=>{ const v=parseInt(document.getElementById(`ag-${i}`).value); return isNaN(v)||v<1?AGENDA[i].min:v; });
+  const hasKey  = !!getKey();
+
+  // Game
+  let game = cachedGame;
+  if (gameRaw && hasKey && game.name !== gameRaw) { await fetchGameRules(); game = cachedGame; }
+  if (!game.name && gameRaw) {
+    game = { name:gameRaw, nameEn:gameRaw,
+      zh:`请填写 API Key 后点击 ✨，AI 将自动生成「${gameRaw}」的完整规则。`,
+      en:`Please enter your API Key and click ✨ to generate full rules for "${gameRaw}".` };
+  }
+
+  // Topics
+  let topics = [];
+  if (topRaw && hasKey) { try { topics = await fetchTopics(topRaw); } catch{} }
+  if (!topics.length && topRaw) {
+    topRaw.split('\n').filter(Boolean).forEach(line => {
+      topics.push(
+        { zh:`关于"${line}"，你有什么看法或经历想分享？`, en:`What experiences or opinions do you have about "${line}"?` },
+        { zh:`"${line}"对你的生活有什么影响？`,            en:`How has "${line}" influenced your life?` }
+      );
+    });
+  }
+
+  // Render rich HTML preview
+  let html = `<div class="out-wrap">`;
+  html += `<div class="ev-title">🌊 ${name}</div>`;
+  html += `<div class="ev-title-en">${nameEn}</div>`;
+  html += `<div class="info-grid">`;
+  html += ic('🕐 时间 · Time',  time,  time);
+  html += ic('📍 地点 · Venue', loc,   locEn);
+  html += ic('✨ 主题 · Theme', theme, themeEn);
+  html += ic('🎤 嘉宾 · Guest', guest, guest);
+  html += `</div>`;
+  html += `<div class="sec-title">📋 活动流程 · Agenda</div>`;
+  AGENDA.forEach((a,i) => {
+    html += `<div class="agenda-item" data-zh="${a.zh}" data-en="${a.en}" data-time="${mins[i]}">
+      <span class="ai-num">0${i+1}</span>
+      <span class="ai-body"><span class="ai-zh">${a.zh}</span><span class="ai-en">${a.en}</span></span>
+      <span class="ai-time">${mins[i]} min</span>
+    </div>`;
+  });
+  if (game.name) {
+    html += `<div class="sec-title">🎮 小游戏规则 · Mini-Game Rules</div>`;
+    html += `<div class="game-title" data-name="${game.name}" data-name-en="${game.nameEn}">${game.name}<span> · ${game.nameEn}</span></div>`;
+    html += biItem('规则 · Rules', game.zh, game.en);
+  }
+  if (topics.length) {
+    html += `<div class="sec-title">💬 讨论问题 · Discussion Questions</div>`;
+    topics.forEach((q,i) => { html += biItem(`Q${i+1}`, q.zh, q.en); });
+  }
+  html += `<div class="ev-footer">欢迎所有人参与 · Everyone is Welcome 🌊</div></div>`;
+
+  const ed = document.getElementById('preview-editor');
+  ed.innerHTML = html;
+  ed.contentEditable = 'true';
+  document.getElementById('editor-toolbar').style.display = 'flex';
+
+  btn.disabled=false; btn.textContent='✦ 一键生成双语策划';
+}
+
+function ic(label, zh, en) {
+  return `<div class="info-cell"><div class="ic-label">${label}</div><div class="ic-zh">${zh}</div><div class="ic-en">${en !== zh ? en : ''}</div></div>`;
+}
+function biItem(tag, zh, en) {
+  return `<div class="bi-item"><div class="bi-tag">${tag}</div><div class="bi-zh">${(zh||'').replace(/\n/g,'<br>')}</div><div class="bi-en">${(en||'').replace(/\n/g,'<br>')}</div></div>`;
+}
+
+/* ══════════════════════════════════════
+   COPY — build clean plain text from data attributes
+══════════════════════════════════════ */
+function doCopy() {
+  const ed = document.getElementById('preview-editor');
+  if (!ed.querySelector('.ev-title')) { alert('内容为空，请先生成策划！'); return; }
+
+  const out = [];
+
+  /* 标题 */
+  const titleZh = ed.querySelector('.ev-title')?.innerText.trim() || '';
+  const titleEn = ed.querySelector('.ev-title-en')?.innerText.trim() || '';
+  out.push(titleZh);
+  if (titleEn) out.push(titleEn);
+  out.push('');
+
+  /* 基本信息 */
+  ed.querySelectorAll('.info-cell').forEach(cell => {
+    const label = cell.querySelector('.ic-label')?.innerText.trim() || '';
+    const zh    = cell.querySelector('.ic-zh')?.innerText.trim()    || '';
+    const en    = cell.querySelector('.ic-en')?.innerText.trim()    || '';
+    if (en && en !== zh) out.push(`${label}：${zh}  /  ${en}`);
+    else if (zh)         out.push(`${label}：${zh}`);
+  });
+  out.push('');
+
+  /* 流程 */
+  const agendaSec = ed.querySelector('.sec-title');
+  if (agendaSec) {
+    out.push('▌ ' + agendaSec.innerText.trim());
+    ed.querySelectorAll('.agenda-item').forEach(item => {
+      const num  = item.querySelector('.ai-num')?.innerText.trim()  || '';
+      const zh   = item.querySelector('.ai-zh')?.innerText.trim()   || '';
+      const en   = item.querySelector('.ai-en')?.innerText.trim()   || '';
+      const time = item.querySelector('.ai-time')?.innerText.trim() || '';
+      out.push(`  ${num}  ${zh} / ${en}   ${time}`);
+    });
+    out.push('');
+  }
+
+  /* 所有 sec-title（从第2个开始） */
+  const secTitles = ed.querySelectorAll('.sec-title');
+  secTitles.forEach((sec, idx) => {
+    if (idx === 0) return; // 流程已处理
+    out.push('▌ ' + sec.innerText.trim());
+
+    /* game-title */
+    const gt = nextUntilSec(sec, '.game-title');
+    gt.forEach(el => {
+      out.push('  ' + el.innerText.trim().replace(/\s+/g,' '));
+    });
+
+    /* bi-items */
+    const bis = nextUntilSec(sec, '.bi-item');
+    bis.forEach(item => {
+      const tag = item.querySelector('.bi-tag')?.innerText.trim() || '';
+      const zh  = item.querySelector('.bi-zh')?.innerText.trim()  || '';
+      const en  = item.querySelector('.bi-en')?.innerText.trim()  || '';
+      if (tag && !tag.startsWith('Q')) out.push('');  // game rules: blank before
+      if (zh) out.push(`  【中】${zh}`);
+      if (en) out.push(`  【EN】${en}`);
+      if (tag && !tag.startsWith('Q')) out.push('');  // blank after game rules
+      else out.push('');  // blank after each Q
+    });
+  });
+
+  /* footer */
+  const footer = ed.querySelector('.ev-footer')?.innerText.trim();
+  if (footer) { out.push(''); out.push(footer); }
+
+  /* 清理：压缩连续空行为最多1行 */
+  const clean = out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+
+  const ta = document.getElementById('_cliparea');
+  ta.value = clean; ta.select(); ta.setSelectionRange(0, 99999);
+
+  const showOk = () => {
+    const b=document.getElementById('btn-copy'), orig=b.innerHTML;
+    b.innerHTML='✅ 已复制！'; b.classList.add('ok');
+    setTimeout(()=>{ b.innerHTML=orig; b.classList.remove('ok'); }, 2500);
+  };
+  if (navigator.clipboard) navigator.clipboard.writeText(clean).then(showOk).catch(()=>{ document.execCommand('copy'); showOk(); });
+  else { document.execCommand('copy'); showOk(); }
+}
+
+/* 收集 sec 之后、下一个 sec 之前符合 selector 的元素 */
+function nextUntilSec(sec, selector) {
+  const result = [];
+  let el = sec.nextElementSibling;
+  while (el && !el.classList.contains('sec-title') && !el.classList.contains('ev-footer')) {
+    if (el.matches(selector)) result.push(el);
+    // also search inside containers
+    el.querySelectorAll(selector).forEach(found => {
+      if (!result.includes(found)) result.push(found);
+    });
+    el = el.nextElementSibling;
+  }
+  return result;
+}
+
+/* ══════════════════════════════════════
+   EDITOR UTILS
+══════════════════════════════════════ */
+function ins(e) { document.execCommand('insertText', false, e); }
+function clearEd() {
+  if (!confirm('确定清空？')) return;
+  const ed=document.getElementById('preview-editor');
+  ed.innerHTML=''; ed.focus();
+}
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+buildAgenda();
+buildHints();
+fillDefaults();
+</script>
+</body>
+</html>
