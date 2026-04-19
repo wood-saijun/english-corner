@@ -14,36 +14,32 @@
   --radius-sm:   10px;
 }
 html { scroll-behavior: smooth; }
-body { font-family: 'Georgia', 'Songti SC', serif; min-height: 100vh; color: #fff; overflow-x: hidden; position: relative; }
-
-。bg-sky { position:fixed;inset:0;z-index:-10;background:linear-gradient(180deg,#0a1f3d 0%,#0d3060 12%,#1a5490 28%,#2980b9 45%,#5ba8d4 58%,#87ceeb 68%,#b8dff0 74%,#d4eef8 78%,#e8f6fb 80%,#c8e8e0 84%,#5dade2 87%,#2e86c1 90%,#1a6090 94%,#0d3d6b 100%); }
-。bg-sun { position:fixed;z-index:-9;width:180px;height:180px;border-radius:50%;top:8%;right:18%;background:radial-gradient(circle,rgba(255,255,220,1) 0%,rgba(255,230,100,.9) 18%,rgba(255,180,50,.6) 40%,rgba(255,140,30,.2) 65%,transparent 80%);box-shadow:0 0 60px 30px rgba(255,220,80,.35),0 0 120px 60px rgba(255,180,40,.18),0 0 200px 100px rgba(255,150,30,.08); }
-。bg-clouds { position:fixed;z-index:-8;inset:0;pointer-events:none; }
-。cloud { position:absolute;background:rgba(255,255,255,.82);border-radius:50px;filter:blur(2px); }
-。cloud::before,.cloud::after { content:'';position:absolute;background:inherit;border-radius:50%; }
-。c1{width:110px;height:32px;top:14%;left:8%;opacity:.75}.c1::before{width:56px;height:48px;top:-22px;left:14px}.c1::after{width:44px;height:38px;top:-14px;left:52px}
-。c2{width:160px;height:38px;top:9%;left:38%;opacity:.55}.c2::before{width:70px;height:58px;top:-28px;left:22px}.c2::after{width:52px;height:42px;top:-18px;left:78px}
-。c3{width:90px;height:26px;top:18%;left:62%;opacity:.45}.c3::before{width:44px;height:38px;top:-18px;left:12px}.c3::after{width:36px;height:30px;top:-12px;left:42px}
-。bg-sea { position:fixed;z-index:-7;bottom:0;left:0;right:0;height:28%;background:linear-gradient(180deg,rgba(93,173,226,0) 0%,rgba(46,134,193,.55) 25%,rgba(26,96,144,.80) 55%,rgba(13,61,107,.95) 80%,rgba(8,40,75,1) 100%);overflow:hidden; }
-。sea-shimmer { position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent 0px,rgba(255,255,255,.03) 2px,transparent 4px,rgba(255,255,255,.06) 8px,transparent 12px);animation:seaMove 8s linear infinite; }
-。sea-shimmer2 { position:absolute;inset:0;background:repeating-linear-gradient(88deg,transparent 0px,rgba(135,206,235,.04) 3px,transparent 6px,rgba(255,255,255,.03) 10px,transparent 16px);animation:seaMove 12s linear infinite reverse; }
-@keyframes seaMove { from{background-position:0 0}到{background-position:200px 0} }
-。bg-horizon { position:fixed;z-index:-6;bottom:26%;left:0;right:0;height:6%;background:linear-gradient(180deg,transparent,rgba(200,230,245,.18),transparent);filter:blur(4px); }
-。bg-arch { position:fixed;z-index:-5;bottom:22%;left:0;right:0;height:220px;pointer-events:none;display:flex;align-items:flex-end; }
-。arch-svg { width:100%;height:100%;filter:drop-shadow(0 -4px 20px rgba(13,45,80,.5)); }
-。bg-overlay { position:fixed;inset:0;z-index:-4;pointer-events:none;background:radial-gradient(ellipse 60% 40% at 82% 18%,rgba(255,200,80,.12) 0%,transparent 70%),radial-gradient(ellipse 40% 30% at 15% 72%,rgba(13,45,80,.35) 0%,transparent 70%); }
-。bg-grain { position:fixed;inset:0;z-index:-3;pointer-events:none;opacity:.22;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)'/%3E%3C/svg%3E"); }
-。bg-vignette { position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 42%,rgba(5,20,45,.5) 100%); }
-
+body { font-family: 'Georgia', 'Songti SC', serif; min-height: 100vh; color: #fff; overflow-x: hidden; position: relative; background-color: #0a1f3d; }
+.bg-sky { position:fixed;inset:0;z-index:-10;background:linear-gradient(180deg,#0a1f3d 0%,#0d3060 12%,#1a5490 28%,#2980b9 45%,#5ba8d4 58%,#87ceeb 68%,#b8dff0 74%,#d4eef8 78%,#e8f6fb 80%,#c8e8e0 84%,#5dade2 87%,#2e86c1 90%,#1a6090 94%,#0d3d6b 100%); }
+.bg-sun { position:fixed;z-index:-9;width:180px;height:180px;border-radius:50%;top:8%;right:18%;background:radial-gradient(circle,rgba(255,255,220,1) 0%,rgba(255,230,100,.9) 18%,rgba(255,180,50,.6) 40%,rgba(255,140,30,.2) 65%,transparent 80%);box-shadow:0 0 60px 30px rgba(255,220,80,.35),0 0 120px 60px rgba(255,180,40,.18),0 0 200px 100px rgba(255,150,30,.08); }
+.bg-clouds { position:fixed;z-index:-8;inset:0;pointer-events:none; }
+.cloud { position:absolute;background:rgba(255,255,255,.82);border-radius:50px;filter:blur(2px); }
+.cloud::before,.cloud::after { content:'';position:absolute;background:inherit;border-radius:50%; }
+.c1{width:110px;height:32px;top:14%;left:8%;opacity:.75}.c1::before{width:56px;height:48px;top:-22px;left:14px}.c1::after{width:44px;height:38px;top:-14px;left:52px}
+.c2{width:160px;height:38px;top:9%;left:38%;opacity:.55}.c2::before{width:70px;height:58px;top:-28px;left:22px}.c2::after{width:52px;height:42px;top:-18px;left:78px}
+.c3{width:90px;height:26px;top:18%;left:62%;opacity:.45}.c3::before{width:44px;height:38px;top:-18px;left:12px}.c3::after{width:36px;height:30px;top:-12px;left:42px}
+.bg-sea { position:fixed;z-index:-7;bottom:0;left:0;right:0;height:28%;background:linear-gradient(180deg,rgba(93,173,226,0) 0%,rgba(46,134,193,.55) 25%,rgba(26,96,144,.80) 55%,rgba(13,61,107,.95) 80%,rgba(8,40,75,1) 100%);overflow:hidden; }
+.sea-shimmer { position:absolute;inset:0;background:repeating-linear-gradient(92deg,transparent 0px,rgba(255,255,255,.03) 2px,transparent 4px,rgba(255,255,255,.06) 8px,transparent 12px);animation:seaMove 8s linear infinite; }
+.sea-shimmer2 { position:absolute;inset:0;background:repeating-linear-gradient(88deg,transparent 0px,rgba(135,206,235,.04) 3px,transparent 6px,rgba(255,255,255,.03) 10px,transparent 16px);animation:seaMove 12s linear infinite reverse; }
+@keyframes seaMove { from{background-position:0 0} to {background-position:200px 0} }
+.bg-horizon { position:fixed;z-index:-6;bottom:26%;left:0;right:0;height:6%;background:linear-gradient(180deg,transparent,rgba(200,230,245,.18),transparent);filter:blur(4px); }
+.bg-arch { position:fixed;z-index:-5;bottom:22%;left:0;right:0;height:220px;pointer-events:none;display:flex;align-items:flex-end; }
+.arch-svg { width:100%;height:100%;filter:drop-shadow(0 -4px 20px rgba(13,45,80,.5)); }
+.bg-overlay { position:fixed;inset:0;z-index:-4;pointer-events:none;background:radial-gradient(ellipse 60% 40% at 82% 18%,rgba(255,200,80,.12) 0%,transparent 70%),radial-gradient(ellipse 40% 30% at 15% 72%,rgba(13,45,80,.35) 0%,transparent 70%); }
+.bg-grain { position:fixed;inset:0;z-index:-3;pointer-events:none;opacity:.22;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='280' height='280' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.bg-vignette { position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 42%,rgba(5,20,45,.5) 100%); }
 .site-header { text-align:center;padding:38px 20px 16px; }
 .site-header h1 { font-size:clamp(1.7rem,4.5vw,2.6rem);font-weight:900;letter-spacing:5px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.4),0 0 40px rgba(255,220,100,.25); }
 .site-header h1 em { color:var(--orange-soft);font-style:normal; }
 .site-header p { margin-top:7px;font-size:.88rem;letter-spacing:3px;color:rgba(255,255,255,.62);font-style:italic; }
 .header-rule { width:80px;height:2px;margin:14px auto 0;background:linear-gradient(90deg,transparent,rgba(255,212,160,.8),rgba(135,206,235,.8),transparent); }
-
 .layout { display:flex;gap:24px;padding:20px 32px 70px;max-width:1400px;margin:0 auto;align-items:flex-start; }
 .card { background:rgba(253,250,245,.12);backdrop-filter:blur(28px) saturate(1.4);-webkit-backdrop-filter:blur(28px) saturate(1.4);border:1px solid rgba(255,255,255,.3);border-radius:var(--radius-lg);box-shadow:0 8px 40px rgba(5,20,50,.28),0 2px 0 rgba(255,255,255,.2) inset,0 -1px 0 rgba(0,0,0,.08) inset;padding:28px 26px; }
-
 .left-panel { flex:0 0 400px;position:sticky;top:20px;display:flex;flex-direction:column;gap:16px; }
 .section-title { font-size:.75rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.92);margin-bottom:18px;display:flex;align-items:center;gap:10px; }
 .section-title::before { content:'';display:inline-block;width:4px;height:20px;flex-shrink:0;background:linear-gradient(180deg,var(--orange-soft),var(--sky-light));border-radius:2px; }
@@ -54,7 +50,6 @@ body { font-family: 'Georgia', 'Songti SC', serif; min-height: 100vh; color: #ff
 .field input::placeholder,.field textarea::placeholder { color:rgba(255,255,255,.32);font-style:italic; }
 .field input:focus,.field textarea:focus { border-color:rgba(255,212,160,.7);background:rgba(255,255,255,.16);box-shadow:0 0 0 3px rgba(255,212,160,.12); }
 .field textarea { resize:vertical;min-height:90px;line-height:1.7; }
-
 .api-key-row { display:flex;gap:8px;align-items:stretch; }
 .api-key-row input { flex:1; }
 .btn-test { padding:10px 14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:var(--radius-sm);color:rgba(255,255,255,.8);font-size:.74rem;font-weight:800;letter-spacing:.5px;cursor:pointer;white-space:nowrap;transition:all .2s; }
@@ -68,22 +63,18 @@ body { font-family: 'Georgia', 'Songti SC', serif; min-height: 100vh; color: #ff
 .status-dot.pulse { animation:blink 2s infinite; }
 @keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
 .ds-logo { font-size:.7rem;color:rgba(255,255,255,.4);font-style:italic;margin-left:auto; }
-
 .game-input-wrap { position:relative; }
 .game-input-wrap input { padding-right:44px; }
 .btn-ai-spark { position:absolute;right:6px;top:50%;transform:translateY(-50%);background:linear-gradient(135deg,#f4a261,#e07b39);border:none;border-radius:7px;width:32px;height:32px;color:#fff;font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s; }
 .btn-ai-spark:hover { transform:translateY(-50%) scale(1.12);box-shadow:0 3px 12px rgba(244,162,97,.5); }
 .btn-ai-spark:disabled { opacity:.4;cursor:not-allowed;transform:translateY(-50%); }
-
 .game-hints { display:flex;flex-wrap:wrap;gap:5px;margin-top:8px; }
 .hint-badge { font-size:.65rem;font-weight:700;letter-spacing:.8px;padding:3px 9px;border-radius:20px;background:rgba(255,212,160,.14);border:1px solid rgba(255,212,160,.28);color:rgba(255,212,160,.85);cursor:pointer;transition:all .2s;user-select:none; }
 .hint-badge:hover { background:rgba(255,212,160,.28);border-color:rgba(255,212,160,.6);color:var(--orange-soft);transform:translateY(-1px); }
-
 .loading-bar { display:none;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,212,160,.1);border:1px solid rgba(255,212,160,.22);border-radius:var(--radius-sm);margin-top:8px;font-size:.8rem;color:var(--orange-soft); }
 .loading-bar.show { display:flex; }
 .spinner { width:15px;height:15px;border:2px solid rgba(255,212,160,.25);border-top-color:var(--orange-soft);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0; }
 @keyframes spin { to{transform:rotate(360deg)} }
-
 .agenda-grid { display:flex;flex-direction:column;gap:8px; }
 .agenda-row { display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);padding:9px 13px; }
 .agenda-row .ag-num { font-size:.72rem;font-weight:800;color:var(--orange-soft);min-width:20px; }
@@ -93,7 +84,6 @@ body { font-family: 'Georgia', 'Songti SC', serif; min-height: 100vh; color: #ff
 .agenda-row input[type="number"]:focus { border-color:var(--orange-soft);box-shadow:0 0 0 2px rgba(255,212,160,.16); }
 .agenda-row .ag-unit { font-size:.73rem;color:rgba(255,255,255,.45); }
 input[type=number]::-webkit-inner-spin-button { opacity:.5; }
-
 .btn-generate { width:100%;padding:15px;background:linear-gradient(135deg,#2980b9 0%,#1a6fa8 40%,#0d4f7c 100%);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:var(--radius-md);font-size:1rem;font-weight:900;letter-spacing:3px;cursor:pointer;transition:all .3s;box-shadow:0 4px 24px rgba(13,79,124,.5),0 1px 0 rgba(255,255,255,.2) inset;position:relative;overflow:hidden; }
 .btn-generate::after { content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);transform:translateX(-100%);transition:transform .6s; }
 .btn-generate:hover::after { transform:translateX(100%); }
@@ -101,21 +91,17 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
 .btn-generate:active { transform:translateY(0); }
 .btn-generate:disabled { opacity:.55;cursor:not-allowed;transform:none; }
 .btn-generate:disabled::after { display:none; }
-
 .right-panel { flex:1;display:flex;flex-direction:column;gap:20px; }
 .output-header { display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12);flex-wrap:wrap;gap:10px; }
 .output-header-left { display:flex;align-items:center;gap:14px;flex-wrap:wrap; }
 .edit-tip { font-size:.68rem;color:rgba(255,255,255,.42);font-style:italic; }
-
 .editor-toolbar { display:none;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.1); }
 .tb-btn { padding:4px 11px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:7px;color:rgba(255,255,255,.75);font-size:.72rem;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.5px; }
 .tb-btn:hover { background:rgba(255,255,255,.2);color:#fff;transform:translateY(-1px); }
 .tb-btn.danger { border-color:rgba(255,120,120,.3);color:rgba(255,180,180,.8); }
 .tb-btn.danger:hover { background:rgba(255,80,80,.15);color:#ffaaaa; }
-
 #preview-editor { min-height:220px;outline:none;line-height:1.85;font-size:.9rem;color:rgba(255,255,255,.92);word-break:break-word;font-family:'Georgia',serif;caret-color:var(--orange-soft); }
 #preview-editor:empty::before { content:attr(data-placeholder);color:rgba(255,255,255,.28);font-style:italic;pointer-events:none; }
-
 #preview-editor .ev-title { font-size:1.25rem;font-weight:900;color:var(--orange-soft);text-align:center;letter-spacing:4px;margin-bottom:4px;text-shadow:0 0 30px rgba(255,180,60,.3); }
 #preview-editor .ev-title-en { font-size:.82rem;color:rgba(255,255,255,.5);text-align:center;letter-spacing:2.5px;font-style:italic;margin-bottom:20px; }
 #preview-editor .info-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px; }
@@ -138,19 +124,15 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
 #preview-editor .game-title { font-size:1rem;font-weight:800;color:var(--orange-soft);margin-bottom:10px; }
 #preview-editor .game-title span { font-size:.82rem;color:rgba(255,255,255,.55);font-style:italic;font-weight:400;margin-left:8px; }
 #preview-editor .ev-footer { text-align:center;padding:15px;margin-top:8px;background:linear-gradient(135deg,rgba(42,132,195,.12),rgba(255,212,160,.08));border:1px solid rgba(135,206,235,.18);border-radius:var(--radius-sm);font-size:.82rem;color:rgba(255,255,255,.55);font-style:italic;letter-spacing:1.5px; }
-
 .btn-copy { padding:8px 20px;background:rgba(255,212,160,.12);color:var(--orange-soft);border:1px solid rgba(255,212,160,.32);border-radius:var(--radius-sm);font-size:.76rem;font-weight:800;letter-spacing:1px;cursor:pointer;transition:all .25s; }
 .btn-copy:hover { background:rgba(255,212,160,.24);border-color:rgba(255,212,160,.65);transform:translateY(-1px); }
 .btn-copy.ok { background:rgba(80,200,120,.16);color:#90ee90;border-color:rgba(80,200,120,.4); }
-
 .placeholder { text-align:center;padding:70px 20px;color:rgba(255,255,255,.3); }
 .placeholder .ph-icon { font-size:3rem;display:block;margin-bottom:16px; }
 .placeholder p { font-size:.9rem;line-height:2;font-style:italic; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)} }
 .out-wrap { animation:fadeUp .45s cubic-bezier(.16,1,.3,1); }
-
 #_cliparea { position:absolute;left:-9999px;top:0; }
-
 @media(max-width:880px){
   .layout{flex-direction:column;padding:14px 14px 60px;}
   .left-panel{flex:none;width:100%;position:static;}
@@ -162,7 +144,6 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
 </style>
 </head>
 <body>
-
 <div class="bg-sky"></div>
 <div class="bg-sun"></div>
 <div class="bg-clouds"><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div></div>
@@ -202,16 +183,13 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
 <div class="bg-grain"></div>
 <div class="bg-vignette"></div>
 <textarea id="_cliparea"></textarea>
-
 <header class="site-header">
   <h1>🌊 英语角<em>策划生成器</em></h1>
   <p>English Corner Planner · Mediterranean Edition</p>
   <div class="header-rule"></div>
 </header>
-
 <div class="layout">
   <aside class="left-panel">
-
     <div class="card">
       <div class="section-title">🤖 DeepSeek AI</div>
       <div class="field">
@@ -226,7 +204,6 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
         </div>
       </div>
     </div>
-
     <div class="card">
       <div class="section-title">活动基本信息</div>
       <div class="field"><label>📌 活动名称</label><input type="text" id="f-name" placeholder="如：电影主题英语角"></div>
@@ -235,7 +212,6 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
       <div class="field"><label>✨ 本期主题</label><input type="text" id="f-theme" placeholder="如：电影与生活"></div>
       <div class="field"><label>🎤 嘉宾信息</label><input type="text" id="f-guest" placeholder="如：俄罗斯留学生 Olesya & Karina"></div>
     </div>
-
     <div class="card">
       <div class="section-title">🎮 小游戏</div>
       <div class="field">
@@ -251,7 +227,6 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
         <div class="game-hints" id="game-hints"></div>
       </div>
     </div>
-
     <div class="card">
       <div class="section-title">💬 讨论主题</div>
       <div class="field">
@@ -259,15 +234,12 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
         <textarea id="f-topics" placeholder="如：&#10;最喜欢的电影&#10;电影对生活的影响&#10;想分享的电影故事"></textarea>
       </div>
     </div>
-
     <div class="card">
       <div class="section-title">流程时间</div>
       <div class="agenda-grid" id="agenda-grid"></div>
     </div>
-
     <button class="btn-generate" id="btn-gen" onclick="generate()">✦ 一键生成双语策划</button>
   </aside>
-
   <main class="right-panel">
     <div class="card">
       <div class="output-header">
@@ -277,7 +249,6 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
         </div>
         <button class="btn-copy" id="btn-copy" onclick="doCopy()">📋 复制最终版本</button>
       </div>
-
       <div class="editor-toolbar" id="editor-toolbar">
         <button class="tb-btn" onclick="document.execCommand('bold')"><b>B</b> 加粗</button>
         <button class="tb-btn" onclick="document.execCommand('italic')"><i>I</i> 斜体</button>
@@ -288,7 +259,6 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
         <button class="tb-btn" onclick="ins('✅')">✅</button>
         <button class="tb-btn danger" onclick="clearEd()">🗑 清空</button>
       </div>
-
       <div id="preview-editor" contenteditable="false"
            data-placeholder="← 填写左侧信息，点击「一键生成」后在此预览并编辑">
         <div class="placeholder">
@@ -300,14 +270,12 @@ input[type=number]::-webkit-inner-spin-button { opacity:.5; }
     </div>
   </main>
 </div>
-
 <script>
 /* ══════════════════════════════════════
    CONFIG
 ══════════════════════════════════════ */
 const DS_BASE  = 'https://api.deepseek.com/v1';
 const DS_MODEL = 'deepseek-chat';
-
 const AGENDA = [
   {zh:'入场签到', en:'Sign in',             min:5 },
   {zh:'小游戏',   en:'Mini-game',           min:10},
@@ -316,18 +284,15 @@ const AGENDA = [
   {zh:'自由畅谈', en:'Free talk',           min:15},
   {zh:'收尾总结', en:'Wrap up & Summarize', min:10},
 ];
-
 const QUICK_GAMES = [
   '脑筋急转弯','绕口令挑战','单词接龙','两真一假',
   '你画我猜','故事接龙','即兴演讲','角色扮演',
   '情感猜猜看','单词炸弹','传话游戏','快速抢答',
 ];
-
 /* ══════════════════════════════════════
    DEEPSEEK
 ══════════════════════════════════════ */
 const getKey = () => document.getElementById('ds-key').value.trim();
-
 async function dsCall(prompt, loadingId, loadingMsg) {
   const key = getKey();
   if (!key) { alert('请先填写 DeepSeek API Key！\n前往 platform.deepseek.com 免费申请'); throw new Error('no key'); }
@@ -348,7 +313,6 @@ async function dsCall(prompt, loadingId, loadingMsg) {
     if (loadingId) document.getElementById(loadingId).classList.remove('show');
   }
 }
-
 async function testDS() {
   const badge = document.getElementById('ds-status');
   badge.className = 'status-badge checking';
@@ -356,17 +320,18 @@ async function testDS() {
   if (!getKey()) { badge.className='status-badge offline'; badge.innerHTML='<span class="status-dot"></span> 未填写 Key'; return; }
   try {
     const res = await fetch(`${DS_BASE}/chat/completions`, {
-      method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${getKey()}`},
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getKey()}` },
       body: JSON.stringify({ model: DS_MODEL, messages:[{role:'user',content:'hi'}], max_tokens:5 }),
     });
     if (res.ok) { badge.className='status-badge online'; badge.innerHTML='<span class="status-dot pulse"></span> 连接正常 ✓'; }
     else {
       const e = await res.json().catch(()=>({}));
-      badge.className='status-badge offline'; badge.innerHTML=`<span class="status-dot"></span> ${e?.error?.message||'HTTP '+res.status}`;
+      badge.className='status-badge offline'; 
+      badge.innerHTML = `<span class="status-dot"></span> ${e?.error?.message||'HTTP '+res.status}`;
     }
   } catch { badge.className='status-badge offline'; badge.innerHTML='<span class="status-dot"></span> 连接失败'; }
 }
-
 /* ══════════════════════════════════════
    HELPERS
 ══════════════════════════════════════ */
@@ -374,7 +339,6 @@ function extract(text, tag) {
   const m = text.match(new RegExp(`\\[${tag}\\]([\\s\\S]*?)\\[\\/${tag}\\]`));
   return m ? m[1].trim() : '';
 }
-
 function transTheme(zh) {
   const map=[['电影与生活','Movies & Life'],['电影','Movies & Cinema'],['旅行','Travel & Discovery'],['文化','Culture & Identity'],['美食','Food & Culture'],['音乐','Music & Life'],['友谊','Friendship'],['未来','Future & Dreams'],['梦想','Dreams & Aspirations'],['技术','Technology'],['科技','Technology & Society'],['学习','Language Learning'],['教育','Education']];
   for(const[k,v]of map) if(zh.includes(k)) return v;
@@ -386,12 +350,10 @@ function transName(zh) {
 function transLoc(zh) {
   return zh.replace('图书馆','Library').replace('教室','Classroom').replace('报告厅','Lecture Hall').replace('会议室','Meeting Room').replace(/(\d+)楼/,'Floor $1').replace(/(\d+)室/,'Room $1');
 }
-
 /* ══════════════════════════════════════
    GAME RULES
 ══════════════════════════════════════ */
 let cachedGame = { name:'', nameEn:'', zh:'', en:'' };
-
 async function fetchGameRules() {
   const name = document.getElementById('f-game').value.trim();
   if (!name) { alert('请先输入游戏名称！'); return; }
@@ -401,7 +363,6 @@ async function fetchGameRules() {
 `你是英语角活动策划专家。请为游戏「${name}」生成双语规则。
 适合英语角（10-25人，约10分钟），规则分4-6步，清晰可操作。
 严格按以下格式输出，标签之间不要有多余内容：
-
 [NAME_EN]游戏英文名[/NAME_EN]
 [RULES_ZH]
 步骤1：xxx
@@ -416,7 +377,6 @@ Step 3: xxx
 Step 4: xxx
 [/RULES_EN]`,
       'game-loading', `DeepSeek 正在生成「${name}」规则…`);
-
     cachedGame = {
       name,
       nameEn: extract(raw, 'NAME_EN') || name,
@@ -429,7 +389,6 @@ Step 4: xxx
     document.getElementById('btn-spark').disabled = false;
   }
 }
-
 /* ══════════════════════════════════════
    TOPIC QUESTIONS
 ══════════════════════════════════════ */
@@ -439,13 +398,11 @@ async function fetchTopics(keywords) {
 关键词：${keywords}
 要求：每个关键词2个问题，问题开放有趣，适合英语学习者，中英文完全对应。
 严格按以下格式，每个问题一个[Q]块，不要加编号或其他内容：
-
 [Q][ZH]中文问题[/ZH][EN]English question[/EN][/Q]`,
     null, null);
   const blocks = raw.match(/\[Q\][\s\S]*?\[\/Q\]/g) || [];
   return blocks.map(b => ({ zh: extract(b,'ZH'), en: extract(b,'EN') })).filter(q=>q.zh&&q.en);
 }
-
 /* ══════════════════════════════════════
    BUILD UI
 ══════════════════════════════════════ */
@@ -476,14 +433,12 @@ function fillDefaults() {
   document.getElementById('f-game').value  = '脑筋急转弯 & 绕口令';
   document.getElementById('f-topics').value= '最喜欢的电影\n电影对生活的影响\n想分享的电影故事';
 }
-
 /* ══════════════════════════════════════
    GENERATE
 ══════════════════════════════════════ */
 async function generate() {
   const btn = document.getElementById('btn-gen');
   btn.disabled=true; btn.textContent='⏳ DeepSeek 生成中…';
-
   const name   = document.getElementById('f-name').value.trim()  || '英语角活动';
   const time   = document.getElementById('f-time').value.trim()  || '待定';
   const loc    = document.getElementById('f-loc').value.trim()   || '待定';
@@ -491,34 +446,30 @@ async function generate() {
   const guest  = document.getElementById('f-guest').value.trim() || '待定';
   const gameRaw = document.getElementById('f-game').value.trim();
   const topRaw  = document.getElementById('f-topics').value.trim();
-
   const nameEn  = transName(name);
   const themeEn = transTheme(theme);
   const locEn   = transLoc(loc);
   const mins    = AGENDA.map((_,i)=>{ const v=parseInt(document.getElementById(`ag-${i}`).value); return isNaN(v)||v<1?AGENDA[i].min:v; });
   const hasKey  = !!getKey();
-
   // Game
   let game = cachedGame;
   if (gameRaw && hasKey && game.name !== gameRaw) { await fetchGameRules(); game = cachedGame; }
   if (!game.name && gameRaw) {
     game = { name:gameRaw, nameEn:gameRaw,
-      zh:`请填写 API Key 后点击 ✨，AI 将自动生成「${gameRaw}」的完整规则。`,
-      en:`Please enter your API Key and click ✨ to generate full rules for "${gameRaw}".` };
+      zh: `请填写 API Key 后点击 ✨，AI 将自动生成「${gameRaw}」的完整规则。`,
+      en: `Please enter your API Key and click ✨ to generate full rules for "${gameRaw}".` };
   }
-
   // Topics
   let topics = [];
   if (topRaw && hasKey) { try { topics = await fetchTopics(topRaw); } catch{} }
   if (!topics.length && topRaw) {
     topRaw.split('\n').filter(Boolean).forEach(line => {
       topics.push(
-        { zh:`关于"${line}"，你有什么看法或经历想分享？`, en:`What experiences or opinions do you have about "${line}"?` },
-        { zh:`"${line}"对你的生活有什么影响？`,            en:`How has "${line}" influenced your life?` }
+        { zh: `关于"${line}"，你有什么看法或经历想分享？`, en: `What experiences or opinions do you have about "${line}"?` },
+        { zh: `"${line}"对你的生活有什么影响？`,            en: `How has "${line}" influenced your life?` }
       );
     });
   }
-
   // Render rich HTML preview
   let html = `<div class="out-wrap">`;
   html += `<div class="ev-title">🌊 ${name}</div>`;
@@ -547,38 +498,31 @@ async function generate() {
     topics.forEach((q,i) => { html += biItem(`Q${i+1}`, q.zh, q.en); });
   }
   html += `<div class="ev-footer">欢迎所有人参与 · Everyone is Welcome 🌊</div></div>`;
-
   const ed = document.getElementById('preview-editor');
   ed.innerHTML = html;
   ed.contentEditable = 'true';
   document.getElementById('editor-toolbar').style.display = 'flex';
-
   btn.disabled=false; btn.textContent='✦ 一键生成双语策划';
 }
-
 function ic(label, zh, en) {
   return `<div class="info-cell"><div class="ic-label">${label}</div><div class="ic-zh">${zh}</div><div class="ic-en">${en !== zh ? en : ''}</div></div>`;
 }
 function biItem(tag, zh, en) {
   return `<div class="bi-item"><div class="bi-tag">${tag}</div><div class="bi-zh">${(zh||'').replace(/\n/g,'<br>')}</div><div class="bi-en">${(en||'').replace(/\n/g,'<br>')}</div></div>`;
 }
-
 /* ══════════════════════════════════════
    COPY — build clean plain text from data attributes
 ══════════════════════════════════════ */
 function doCopy() {
   const ed = document.getElementById('preview-editor');
   if (!ed.querySelector('.ev-title')) { alert('内容为空，请先生成策划！'); return; }
-
   const out = [];
-
   /* 标题 */
   const titleZh = ed.querySelector('.ev-title')?.innerText.trim() || '';
   const titleEn = ed.querySelector('.ev-title-en')?.innerText.trim() || '';
   out.push(titleZh);
   if (titleEn) out.push(titleEn);
   out.push('');
-
   /* 基本信息 */
   ed.querySelectorAll('.info-cell').forEach(cell => {
     const label = cell.querySelector('.ic-label')?.innerText.trim() || '';
@@ -588,7 +532,6 @@ function doCopy() {
     else if (zh)         out.push(`${label}：${zh}`);
   });
   out.push('');
-
   /* 流程 */
   const agendaSec = ed.querySelector('.sec-title');
   if (agendaSec) {
@@ -598,23 +541,20 @@ function doCopy() {
       const zh   = item.querySelector('.ai-zh')?.innerText.trim()   || '';
       const en   = item.querySelector('.ai-en')?.innerText.trim()   || '';
       const time = item.querySelector('.ai-time')?.innerText.trim() || '';
-      out.push(`  ${num}  ${zh} / ${en}   ${time}`);
+      out.push(`${num}  ${zh} / ${en}   ${time}`);
     });
     out.push('');
   }
-
   /* 所有 sec-title（从第2个开始） */
   const secTitles = ed.querySelectorAll('.sec-title');
   secTitles.forEach((sec, idx) => {
     if (idx === 0) return; // 流程已处理
     out.push('▌ ' + sec.innerText.trim());
-
     /* game-title */
     const gt = nextUntilSec(sec, '.game-title');
     gt.forEach(el => {
       out.push('  ' + el.innerText.trim().replace(/\s+/g,' '));
     });
-
     /* bi-items */
     const bis = nextUntilSec(sec, '.bi-item');
     bis.forEach(item => {
@@ -622,23 +562,19 @@ function doCopy() {
       const zh  = item.querySelector('.bi-zh')?.innerText.trim()  || '';
       const en  = item.querySelector('.bi-en')?.innerText.trim()  || '';
       if (tag && !tag.startsWith('Q')) out.push('');  // game rules: blank before
-      if (zh) out.push(`  【中】${zh}`);
-      if (en) out.push(`  【EN】${en}`);
+      if (zh) out.push(`【中】${zh}`);
+      if (en) out.push(`【EN】${en}`);
       if (tag && !tag.startsWith('Q')) out.push('');  // blank after game rules
       else out.push('');  // blank after each Q
     });
   });
-
   /* footer */
   const footer = ed.querySelector('.ev-footer')?.innerText.trim();
   if (footer) { out.push(''); out.push(footer); }
-
   /* 清理：压缩连续空行为最多1行 */
   const clean = out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
-
   const ta = document.getElementById('_cliparea');
   ta.value = clean; ta.select(); ta.setSelectionRange(0, 99999);
-
   const showOk = () => {
     const b=document.getElementById('btn-copy'), orig=b.innerHTML;
     b.innerHTML='✅ 已复制！'; b.classList.add('ok');
@@ -647,7 +583,6 @@ function doCopy() {
   if (navigator.clipboard) navigator.clipboard.writeText(clean).then(showOk).catch(()=>{ document.execCommand('copy'); showOk(); });
   else { document.execCommand('copy'); showOk(); }
 }
-
 /* 收集 sec 之后、下一个 sec 之前符合 selector 的元素 */
 function nextUntilSec(sec, selector) {
   const result = [];
@@ -662,7 +597,6 @@ function nextUntilSec(sec, selector) {
   }
   return result;
 }
-
 /* ══════════════════════════════════════
    EDITOR UTILS
 ══════════════════════════════════════ */
@@ -672,7 +606,6 @@ function clearEd() {
   const ed=document.getElementById('preview-editor');
   ed.innerHTML=''; ed.focus();
 }
-
 /* ══════════════════════════════════════
    INIT
 ══════════════════════════════════════ */
